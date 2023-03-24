@@ -9,6 +9,11 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  get_it: ^7.2.0
+  go_router: ^6.5.0
+  prism_flutter_core: ^0.0.1+1
+  prism_flutter_getit: ^0.0.1
+  prism_flutter_go_router: ^0.0.1
 
 dev_dependencies:
   flutter_test:

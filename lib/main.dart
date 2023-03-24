@@ -1,20 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:smart_home_app/src/app.dart';
+import 'package:smart_home_app/src/bootstrapper.dart';
+import 'package:smart_home_app/src/common/dependencies/app_locator.dart';
 
-void main() {
-  runApp(const MainApp());
-}
+void main() async {
+  final boostrapper = Bootstrapper();
+  await boostrapper.run();
+  locator = boostrapper.container;
 
-class MainApp extends StatelessWidget {
-  const MainApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
-        ),
-      ),
-    );
-  }
+  runApp(const App());
 }
