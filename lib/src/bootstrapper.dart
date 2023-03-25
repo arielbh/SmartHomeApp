@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:prism_flutter_core/modules/module_catalog.dart';
 import 'package:prism_flutter_core/prism_flutter_core.dart';
 import 'package:prism_flutter_go_router/interfaces/module_route.dart';
 import 'package:prism_flutter_go_router/prism_flutter_go_router.dart';
+import 'package:smart_home_app/src/modules/home/home_module.dart';
 import 'package:smart_home_app/src/modules/user/routes/welcome_route.dart';
 import 'package:smart_home_app/src/modules/user/user_module.dart';
 import 'package:smart_home_app/src/shell/shell_widget.dart';
@@ -13,6 +13,7 @@ GlobalKey<NavigatorState> _shellNavigatorKey = GlobalKey<NavigatorState>(debugLa
 
 class Bootstrapper extends GoRouterBootstrapper {
   final _coreModules = [
+    ModuleInfo((c) => HomeModule()),
     ModuleInfo((c) => UserModule()),
   ];
   final _featureModules = [];
