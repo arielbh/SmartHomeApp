@@ -5,6 +5,7 @@ import 'package:prism_flutter_go_router/interfaces/module_route.dart';
 import 'package:smart_home_app/src/common/dependencies/app_locator.dart';
 import 'package:smart_home_app/src/modules/database/services/database_service.dart';
 import 'package:smart_home_app/src/modules/home/bloc/home_edit_bloc.dart';
+import 'package:smart_home_app/src/modules/home/services/home_service.dart';
 import 'package:smart_home_app/src/modules/home/views/home_edit_widget.dart';
 
 class HomeEditRoute extends ModuleRoute {
@@ -12,7 +13,11 @@ class HomeEditRoute extends ModuleRoute {
 
   Widget build(BuildContext context, GoRouterState state) {
     return BlocProvider(
-      create: (context) => HomeEditBloc(database: locator<DatabaseService>(), key: state.extra),
+      create: (context) => HomeEditBloc(
+        homeService: locator<HomeService>(),
+        database: locator<DatabaseService>(),
+        key: state.extra,
+      ),
       child: HomeEditWidget(),
     );
   }
