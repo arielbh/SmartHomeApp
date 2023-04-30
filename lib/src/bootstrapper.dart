@@ -5,6 +5,7 @@ import 'package:prism_flutter_go_router/interfaces/module_route.dart';
 import 'package:prism_flutter_go_router/prism_flutter_go_router.dart';
 import 'package:smart_home_app/src/modules/app_services/app_services_module.dart';
 import 'package:smart_home_app/src/modules/database/database_module.dart';
+import 'package:smart_home_app/src/modules/device/device_module.dart';
 import 'package:smart_home_app/src/modules/home/home_module.dart';
 import 'package:smart_home_app/src/modules/user/routes/welcome_route.dart';
 import 'package:smart_home_app/src/modules/user/user_module.dart';
@@ -19,6 +20,7 @@ class Bootstrapper extends GoRouterBootstrapper {
     ModuleInfo((c) => DatabaseModule()),
     ModuleInfo((c) => HomeModule()),
     ModuleInfo((c) => UserModule()),
+    ModuleInfo((c) => DeviceModule()),
   ];
 
   final _featureModules = [];
@@ -44,11 +46,6 @@ class Bootstrapper extends GoRouterBootstrapper {
       ],
       //errorBuilder: (context, state) => ErrorDisplayWidget(state.error),
       debugLogDiagnostics: false,
-      // observers: [
-      //   if (container.isRegistered<AnalyticsService>())
-      //     AnalyticsNavigationObserver(analyticsService: container<AnalyticsService>()),
-      //   if (container.isRegistered<FlowManager>()) container<FlowManager>().navigatorObserver,
-      // ],
     );
 
     return goRouter;
@@ -56,10 +53,6 @@ class Bootstrapper extends GoRouterBootstrapper {
 
   ShellRoute _routeToTabs(List<GoRoute> routes) => ShellRoute(
         navigatorKey: _shellNavigatorKey,
-        // observers: [
-        //   if (container.isRegistered<AnalyticsService>())
-        //     AnalyticsNavigationObserver(analyticsService: container<AnalyticsService>()),
-        // ],
         builder: (BuildContext context, GoRouterState state, Widget child) => createShell(context, state, child),
         routes: routes,
       );

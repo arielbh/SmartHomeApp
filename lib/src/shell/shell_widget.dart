@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:prism_flutter_core/prism_flutter_core.dart';
+import 'package:smart_home_app/src/common/dependencies/app_locator.dart';
+import 'package:smart_home_app/src/common/region_names.dart';
 
 class ShellWidget extends StatelessWidget {
   final Widget child;
@@ -14,16 +18,17 @@ class ShellWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        centerTitle: false,
-        title: title != null
-            ? Text(
-                title!,
-                style: Theme.of(context).textTheme.headlineSmall?.copyWith(color: Colors.black),
-                textAlign: TextAlign.left,
-              )
-            : null,
+        centerTitle: true,
+        title: title != null ? Text(title!, style: Theme.of(context).textTheme.headlineSmall) : null,
       ),
       body: child,
+      floatingActionButton: locator<GoRouter>().location == "/layout"
+          ? RegionBuilder(
+              regionManager: locator<RegionManager>(),
+              regionName: RegionNames.actionArea.name,
+              singleChild: (widget) => widget,
+            )
+          : null,
     );
   }
 }

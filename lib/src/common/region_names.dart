@@ -1,4 +1,5 @@
 enum RegionNames {
+  actionArea,
   topBarLeft,
   topBarRight,
   mainLeft,
