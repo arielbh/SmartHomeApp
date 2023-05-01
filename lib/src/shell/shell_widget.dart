@@ -19,6 +19,7 @@ class ShellWidget extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
+
         title: title != null ? Text(title!, style: Theme.of(context).textTheme.headlineSmall) : null,
       ),
       body: child,

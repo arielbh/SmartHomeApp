@@ -13,7 +13,7 @@ class WelcomeWidget extends StatelessWidget {
           const Text('Welcome'),
           TextButton(
               onPressed: () {
-                locator<GoRouter>().push("/layout");
+                locator<GoRouter>().go("/layout");
               },
               child: const Text("Next1")),
         ],

@@ -21,7 +21,7 @@ class AddDeviceRoute extends ModuleRoute {
   String get screenPath => "/device/add";
 
   @override
-  bool get isRoot => false;
+  bool get isRoot => true;
 
   @override
   GoRoute toGoRoute([GlobalKey<NavigatorState>? parentNavigatorKey]) {

@@ -4,6 +4,7 @@ import 'package:prism_flutter_go_router/interfaces/module_route.dart';
 import 'package:prism_flutter_go_router/prism_flutter_go_router.dart';
 import 'package:smart_home_app/src/common/region_names.dart';
 import 'package:smart_home_app/src/modules/device/routes/add_device_route.dart';
+import 'package:smart_home_app/src/modules/device/services/device_manager.dart';
 import 'package:smart_home_app/src/modules/device/views/floating_add_device_widget.dart';
 
 class DeviceModule extends GoRouterModule {
@@ -14,6 +15,7 @@ class DeviceModule extends GoRouterModule {
 
   @override
   Future<void> init(GetIt container) async {
+    container.registerLazySingleton(() => DeviceManager());
     // final database = container<DatabaseService>();
     // await database.registerSchema<Home>(HomeAdapter());
     // container.registerLazySingleton(() => HomeService(
