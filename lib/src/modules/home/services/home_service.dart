@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_home_app/src/common/app_models/app_home.dart';
 import 'package:smart_home_app/src/common/app_models/app_room.dart';
 import 'package:smart_home_app/src/common/db_models/home.dart';
+import 'package:smart_home_app/src/common/db_models/room.dart';
 import 'package:smart_home_app/src/common/interfaces/room_type.dart';
 import 'package:smart_home_app/src/modules/app_services/services/shared_preferences_service.dart';
 import 'package:smart_home_app/src/modules/database/services/database_service.dart';
@@ -20,51 +21,43 @@ class HomeService extends Cubit<HomeState> {
     required this.database,
     required this.localStorageService,
   }) : super(HomeState(active: const AppHome(name: 'My Home', rooms: []))) {
-    // database.watch<Home>().then((value) => value.listen((event) => loadHomes()));
-
     loadHomes();
   }
 
   void loadHomes() async {
     final allHomes = database.getAll<Home>();
     if (allHomes.isEmpty) {
-      final home = state.active.toDb();
+      final home = await state.active.toDb(database, []);
       await database.save(home);
+      final newHome = state.active.copyWith(key: home.key);
+      emit(HomeState(active: newHome));
     } else {
       final active = AppHome.fromDb(allHomes.first);
       emit(HomeState(active: active));
     }
-    // final key = localStorageService.getInt("activeHome");
-
-    // final active = (key != null) ? allHomes.firstWhereOrNull((element) => element.key == key) : null;
-    // emit(HomeState(allHomes: allHomes, active: active));
   }
 
-  // void removeActiveHome() {
-  //   localStorageService.remove("activeHome");
-  //   emit(HomeState(allHomes: state.allHomes, active: null));
-  // }
-
-  // Future<void> activate(int key) async {
-  //   await localStorageService.setInt("activeHome", key);
-  //   final active = state.allHomes.firstWhereOrNull((element) => element.key == key);
-  //   emit(HomeState(allHomes: state.allHomes, active: active));
-  // }
-
-  addDevice(String deviceId, RoomType roomType) {
+  Future<void> addDevice(String deviceId, RoomType roomType) async {
     final exitingRoom = state.active.rooms.firstWhereOrNull((room) => room.type == roomType);
+    AppHome home;
     if (exitingRoom == null) {
       final room = AppRoom(type: roomType, deviceIds: [deviceId]);
-      final home = state.active.copyWith(rooms: [...state.active.rooms, room]);
-      emit(HomeState(active: home));
-      return;
+      home = state.active.copyWith(rooms: [...state.active.rooms, room]);
     } else {
       final room = exitingRoom.copyWith(deviceIds: [...exitingRoom.deviceIds, deviceId]);
-      final home = state.active.copyWith(rooms: [
+      home = state.active.copyWith(rooms: [
         ...state.active.rooms.where((element) => element.type != roomType),
         room,
       ]);
-      emit(HomeState(active: home));
     }
+    List<Room> rooms = [];
+    for (final room in home.rooms) {
+      final databaseRoom = await room.toDb(database);
+      await database.save(databaseRoom);
+      rooms.add(databaseRoom);
+    }
+    final databaseHome = await home.toDb(database, rooms);
+    await database.save(databaseHome);
+    emit(HomeState(active: home));
   }
 }

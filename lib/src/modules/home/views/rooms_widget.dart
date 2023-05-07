@@ -49,7 +49,7 @@ class _EmptyHome extends StatelessWidget {
           "Welcome to ${home.name}",
           style: Theme.of(context).textTheme.headlineMedium,
         ),
-        Text("Add a device to get started"),
+        const Text("Add a device to get started"),
         ElevatedButton(
           onPressed: () => locator<GoRouter>().push("/device/add"),
           child: const Text("Add Device"),

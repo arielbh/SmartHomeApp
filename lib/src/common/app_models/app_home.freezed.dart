@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$AppHome {
   String get name => throw _privateConstructorUsedError;
   List<AppRoom> get rooms => throw _privateConstructorUsedError;
+  dynamic get key => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $AppHomeCopyWith<AppHome> get copyWith => throw _privateConstructorUsedError;
@@ -28,7 +29,7 @@ abstract class $AppHomeCopyWith<$Res> {
   factory $AppHomeCopyWith(AppHome value, $Res Function(AppHome) then) =
       _$AppHomeCopyWithImpl<$Res, AppHome>;
   @useResult
-  $Res call({String name, List<AppRoom> rooms});
+  $Res call({String name, List<AppRoom> rooms, dynamic key});
 }
 
 /// @nodoc
@@ -46,6 +47,7 @@ class _$AppHomeCopyWithImpl<$Res, $Val extends AppHome>
   $Res call({
     Object? name = null,
     Object? rooms = null,
+    Object? key = freezed,
   }) {
     return _then(_value.copyWith(
       name: null == name
@@ -56,6 +58,10 @@ class _$AppHomeCopyWithImpl<$Res, $Val extends AppHome>
           ? _value.rooms
           : rooms // ignore: cast_nullable_to_non_nullable
               as List<AppRoom>,
+      key: freezed == key
+          ? _value.key
+          : key // ignore: cast_nullable_to_non_nullable
+              as dynamic,
     ) as $Val);
   }
 }
@@ -67,7 +73,7 @@ abstract class _$$_AppHomeCopyWith<$Res> implements $AppHomeCopyWith<$Res> {
       __$$_AppHomeCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String name, List<AppRoom> rooms});
+  $Res call({String name, List<AppRoom> rooms, dynamic key});
 }
 
 /// @nodoc
@@ -82,6 +88,7 @@ class __$$_AppHomeCopyWithImpl<$Res>
   $Res call({
     Object? name = null,
     Object? rooms = null,
+    Object? key = freezed,
   }) {
     return _then(_$_AppHome(
       name: null == name
@@ -92,6 +99,10 @@ class __$$_AppHomeCopyWithImpl<$Res>
           ? _value._rooms
           : rooms // ignore: cast_nullable_to_non_nullable
               as List<AppRoom>,
+      key: freezed == key
+          ? _value.key
+          : key // ignore: cast_nullable_to_non_nullable
+              as dynamic,
     ));
   }
 }
@@ -99,7 +110,8 @@ class __$$_AppHomeCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_AppHome implements _AppHome {
-  const _$_AppHome({required this.name, required final List<AppRoom> rooms})
+  const _$_AppHome(
+      {required this.name, required final List<AppRoom> rooms, this.key})
       : _rooms = rooms;
 
   @override
@@ -113,8 +125,11 @@ class _$_AppHome implements _AppHome {
   }
 
   @override
+  final dynamic key;
+
+  @override
   String toString() {
-    return 'AppHome(name: $name, rooms: $rooms)';
+    return 'AppHome(name: $name, rooms: $rooms, key: $key)';
   }
 
   @override
@@ -123,12 +138,16 @@ class _$_AppHome implements _AppHome {
         (other.runtimeType == runtimeType &&
             other is _$_AppHome &&
             (identical(other.name, name) || other.name == name) &&
-            const DeepCollectionEquality().equals(other._rooms, _rooms));
+            const DeepCollectionEquality().equals(other._rooms, _rooms) &&
+            const DeepCollectionEquality().equals(other.key, key));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, name, const DeepCollectionEquality().hash(_rooms));
+      runtimeType,
+      name,
+      const DeepCollectionEquality().hash(_rooms),
+      const DeepCollectionEquality().hash(key));
 
   @JsonKey(ignore: true)
   @override
@@ -140,12 +159,15 @@ class _$_AppHome implements _AppHome {
 abstract class _AppHome implements AppHome {
   const factory _AppHome(
       {required final String name,
-      required final List<AppRoom> rooms}) = _$_AppHome;
+      required final List<AppRoom> rooms,
+      final dynamic key}) = _$_AppHome;
 
   @override
   String get name;
   @override
   List<AppRoom> get rooms;
+  @override
+  dynamic get key;
   @override
   @JsonKey(ignore: true)
   _$$_AppHomeCopyWith<_$_AppHome> get copyWith =>

@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$AppRoom {
   RoomType get type => throw _privateConstructorUsedError;
   List<String> get deviceIds => throw _privateConstructorUsedError;
+  dynamic get key => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $AppRoomCopyWith<AppRoom> get copyWith => throw _privateConstructorUsedError;
@@ -28,7 +29,7 @@ abstract class $AppRoomCopyWith<$Res> {
   factory $AppRoomCopyWith(AppRoom value, $Res Function(AppRoom) then) =
       _$AppRoomCopyWithImpl<$Res, AppRoom>;
   @useResult
-  $Res call({RoomType type, List<String> deviceIds});
+  $Res call({RoomType type, List<String> deviceIds, dynamic key});
 }
 
 /// @nodoc
@@ -46,6 +47,7 @@ class _$AppRoomCopyWithImpl<$Res, $Val extends AppRoom>
   $Res call({
     Object? type = null,
     Object? deviceIds = null,
+    Object? key = freezed,
   }) {
     return _then(_value.copyWith(
       type: null == type
@@ -56,6 +58,10 @@ class _$AppRoomCopyWithImpl<$Res, $Val extends AppRoom>
           ? _value.deviceIds
           : deviceIds // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      key: freezed == key
+          ? _value.key
+          : key // ignore: cast_nullable_to_non_nullable
+              as dynamic,
     ) as $Val);
   }
 }
@@ -67,7 +73,7 @@ abstract class _$$_AppRoomCopyWith<$Res> implements $AppRoomCopyWith<$Res> {
       __$$_AppRoomCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({RoomType type, List<String> deviceIds});
+  $Res call({RoomType type, List<String> deviceIds, dynamic key});
 }
 
 /// @nodoc
@@ -82,6 +88,7 @@ class __$$_AppRoomCopyWithImpl<$Res>
   $Res call({
     Object? type = null,
     Object? deviceIds = null,
+    Object? key = freezed,
   }) {
     return _then(_$_AppRoom(
       type: null == type
@@ -92,6 +99,10 @@ class __$$_AppRoomCopyWithImpl<$Res>
           ? _value._deviceIds
           : deviceIds // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      key: freezed == key
+          ? _value.key
+          : key // ignore: cast_nullable_to_non_nullable
+              as dynamic,
     ));
   }
 }
@@ -99,7 +110,8 @@ class __$$_AppRoomCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_AppRoom implements _AppRoom {
-  const _$_AppRoom({required this.type, required final List<String> deviceIds})
+  const _$_AppRoom(
+      {required this.type, required final List<String> deviceIds, this.key})
       : _deviceIds = deviceIds;
 
   @override
@@ -113,8 +125,11 @@ class _$_AppRoom implements _AppRoom {
   }
 
   @override
+  final dynamic key;
+
+  @override
   String toString() {
-    return 'AppRoom(type: $type, deviceIds: $deviceIds)';
+    return 'AppRoom(type: $type, deviceIds: $deviceIds, key: $key)';
   }
 
   @override
@@ -124,12 +139,16 @@ class _$_AppRoom implements _AppRoom {
             other is _$_AppRoom &&
             (identical(other.type, type) || other.type == type) &&
             const DeepCollectionEquality()
-                .equals(other._deviceIds, _deviceIds));
+                .equals(other._deviceIds, _deviceIds) &&
+            const DeepCollectionEquality().equals(other.key, key));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, type, const DeepCollectionEquality().hash(_deviceIds));
+      runtimeType,
+      type,
+      const DeepCollectionEquality().hash(_deviceIds),
+      const DeepCollectionEquality().hash(key));
 
   @JsonKey(ignore: true)
   @override
@@ -141,12 +160,15 @@ class _$_AppRoom implements _AppRoom {
 abstract class _AppRoom implements AppRoom {
   const factory _AppRoom(
       {required final RoomType type,
-      required final List<String> deviceIds}) = _$_AppRoom;
+      required final List<String> deviceIds,
+      final dynamic key}) = _$_AppRoom;
 
   @override
   RoomType get type;
   @override
   List<String> get deviceIds;
+  @override
+  dynamic get key;
   @override
   @JsonKey(ignore: true)
   _$$_AppRoomCopyWith<_$_AppRoom> get copyWith =>

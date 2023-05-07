@@ -18,15 +18,18 @@ class HomeAdapter extends TypeAdapter<Home> {
     };
     return Home(
       name: fields[0] as String,
+      rooms: (fields[1] as HiveList?)?.castHiveList(),
     );
   }
 
   @override
   void write(BinaryWriter writer, Home obj) {
     writer
-      ..writeByte(1)
+      ..writeByte(2)
       ..writeByte(0)
-      ..write(obj.name);
+      ..write(obj.name)
+      ..writeByte(1)
+      ..write(obj.rooms);
   }
 
   @override

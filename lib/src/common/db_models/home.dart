@@ -5,11 +5,14 @@ part 'home.g.dart';
 
 @HiveType(typeId: 1)
 class Home extends HiveObject {
-  Home({required this.name});
+  Home({
+    required this.name,
+    this.rooms,
+  });
 
   @HiveField(0)
   String name;
 
-  // @HiveField(1)
-  // HiveList? rooms;
+  @HiveField(1)
+  HiveList<Room>? rooms;
 }
