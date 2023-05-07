@@ -9,7 +9,7 @@ class AddDeviceScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final devices = locator<DeviceManager>().devices;
+    final devices = locator<DeviceManager>().definitions;
     return Scaffold(
       appBar: AppBar(
         title: const Text("Add Device"),

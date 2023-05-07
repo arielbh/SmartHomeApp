@@ -20,10 +20,11 @@ class RoomsWidget extends StatelessWidget {
           itemBuilder: (context, index) => _RoomItem(
             room: state.active.rooms[index],
             onPressed: (String id) {
-              // locator<GoRouter>().goNamed(
-              //   "device_info",
-              //   params: {'id': model.id},
-              // );
+              final definition = locator<DeviceManager>().getDefinition(id);
+              locator<GoRouter>().pushNamed(
+                definition.operatePath,
+                params: {'deviceId': id},
+              );
             },
           ),
           itemCount: state.active.rooms.length,
@@ -73,12 +74,22 @@ class _RoomItem extends StatelessWidget {
     return ExpansionTile(
       leading: Icon(room.type.icon),
       title: Text(room.type.name, style: Theme.of(context).textTheme.titleLarge),
-      children: room.deviceIds
-          .map((e) => ListTile(
-                title: Text(locator<DeviceManager>().getById(e).name),
-                onTap: () => onPressed(e),
-              ))
-          .toList(),
+      children: room.deviceIds.map((e) {
+        final manager = locator<DeviceManager>();
+        final definition = manager.getDefinition(e);
+        final name = manager.getById(e).name;
+
+        return ListTile(
+          title: Row(
+            children: [
+              Icon(definition.icon),
+              const SizedBox(width: 8),
+              Text(name),
+            ],
+          ),
+          onTap: () => onPressed(e),
+        );
+      }).toList(),
     );
   }
 }

@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 abstract class DeviceDefinition {
   String get name;
   IconData get icon;
+  String get operatePath;
   List<DeviceModelInfo> get models => [];
 }
 

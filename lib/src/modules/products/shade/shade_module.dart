@@ -10,6 +10,6 @@ class ShadeModule extends GoRouterModule {
 
   @override
   Future<void> init(GetIt container) async {
-    container<DeviceManager>().addDevice(ShadeDefinition());
+    container<DeviceManager>().addDeviceDefinition(ShadeDefinition());
   }
 }

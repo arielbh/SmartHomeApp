@@ -14,4 +14,7 @@ class ShadeDefinition extends DeviceDefinition {
         DeviceModelInfo(id: "3shade", name: "Graber Motorized Shades"),
         DeviceModelInfo(id: "4shade", name: "IKEA Fyrtur"),
       ];
+
+  @override
+  String get operatePath => "thermo/operate";
 }

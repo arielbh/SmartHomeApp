@@ -19,4 +19,7 @@ class ThermoDefinition extends DeviceDefinition {
         DeviceModelInfo(id: "3thermo", name: "Mysa Smart Thermostat"),
         DeviceModelInfo(id: "4thermo", name: "Ecobee Smart Thermostat Premium"),
       ];
+
+  @override
+  String get operatePath => "thermo/operate";
 }
