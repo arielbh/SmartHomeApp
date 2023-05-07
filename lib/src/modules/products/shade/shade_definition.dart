@@ -16,5 +16,5 @@ class ShadeDefinition extends DeviceDefinition {
       ];
 
   @override
-  String get operatePath => "thermo/operate";
+  String get operatePath => "shade/operate";
 }
