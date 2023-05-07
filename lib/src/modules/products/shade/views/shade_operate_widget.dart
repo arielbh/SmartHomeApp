@@ -47,7 +47,7 @@ class _ShadeOperateWidgetState extends State<ShadeOperateWidget> {
       body: SafeArea(
         child: Stack(
           children: [
-            Image.asset('assets/images/generic.png'),
+            Image.asset('assets/images/shade.png'),
             Container(color: Colors.white.withOpacity(0.5)),
             Padding(
               padding: const EdgeInsets.fromLTRB(20.0, 8.0, 20.0, 0),

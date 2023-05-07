@@ -34,13 +34,6 @@ class HomeModule extends GoRouterModule {
           localStorageService: container<LocalStorageService>(),
         ));
     final regionManager = container<RegionManager>();
-    // regionManager.registerView(
-    //   RegionNames.topBarLeft.name,
-    //   RegionWidgetRegistration(
-    //     metadata: MultiChildMetadata("homeSelection"),
-    //     registration: (context) => const HomeSelectionWidget(),
-    //   ),
-    // );
     regionManager.registerView(
       RegionNames.main.name,
       RegionWidgetRegistration(
