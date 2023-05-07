@@ -20,9 +20,9 @@ class Bootstrapper extends GoRouterBootstrapper {
   final _coreModules = [
     ModuleInfo((c) => AppServicesModule()),
     ModuleInfo((c) => DatabaseModule()),
+    ModuleInfo((c) => DeviceModule()),
     ModuleInfo((c) => HomeModule()),
     ModuleInfo((c) => UserModule()),
-    ModuleInfo((c) => DeviceModule()),
   ];
 
   final _featureModules = [
@@ -49,7 +49,6 @@ class Bootstrapper extends GoRouterBootstrapper {
         _routeToTabs(innerRoutes),
         ...rootRoutes,
       ],
-      //errorBuilder: (context, state) => ErrorDisplayWidget(state.error),
       debugLogDiagnostics: false,
     );
 

@@ -4,8 +4,10 @@ import 'package:prism_flutter_go_router/interfaces/module_route.dart';
 import 'package:prism_flutter_go_router/prism_flutter_go_router.dart';
 import 'package:smart_home_app/src/common/db_models/home.dart';
 import 'package:smart_home_app/src/common/db_models/room.dart';
+import 'package:smart_home_app/src/common/events/device_added_event.dart';
 import 'package:smart_home_app/src/common/region_names.dart';
 import 'package:smart_home_app/src/modules/app_services/services/shared_preferences_service.dart';
+import 'package:smart_home_app/src/modules/app_services/services/toaster.dart';
 import 'package:smart_home_app/src/modules/database/services/database_service.dart';
 import 'package:smart_home_app/src/modules/home/routes/layout_route.dart';
 import 'package:smart_home_app/src/modules/home/services/home_accessor.dart';
@@ -19,7 +21,6 @@ class HomeModule extends GoRouterModule {
   List<ModuleRoute> configureRoutes() {
     return [
       LayoutRoute(),
-      // HomeEditRoute(),
     ];
   }
 
@@ -41,5 +42,8 @@ class HomeModule extends GoRouterModule {
         registration: (context) => const RoomsWidget(),
       ),
     );
+    container<EventAggregator>().getEvent<DeviceAddedEvent>()?.subscribe((event) => container<ToasterService>().show(
+          () => ToastData("Device added", isTemporary: true),
+        ));
   }
 }
