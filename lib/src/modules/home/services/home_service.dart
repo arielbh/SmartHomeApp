@@ -2,11 +2,9 @@ import 'package:collection/collection.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_home_app/src/common/app_models/app_home.dart';
 import 'package:smart_home_app/src/common/app_models/app_room.dart';
-import 'package:smart_home_app/src/common/db_models/home.dart';
-import 'package:smart_home_app/src/common/db_models/room.dart';
 import 'package:smart_home_app/src/common/interfaces/room_type.dart';
 import 'package:smart_home_app/src/modules/app_services/services/shared_preferences_service.dart';
-import 'package:smart_home_app/src/modules/database/services/database_service.dart';
+import 'package:smart_home_app/src/modules/home/services/home_accessor.dart';
 
 class HomeState {
   final AppHome active;
@@ -15,25 +13,23 @@ class HomeState {
 }
 
 class HomeService extends Cubit<HomeState> {
-  final DatabaseService database;
+  final HomeAccessor accessor;
   final LocalStorageService localStorageService;
   HomeService({
-    required this.database,
+    required this.accessor,
     required this.localStorageService,
   }) : super(HomeState(active: const AppHome(name: 'My Home', rooms: []))) {
     loadHomes();
   }
 
   void loadHomes() async {
-    final allHomes = database.getAll<Home>();
-    if (allHomes.isEmpty) {
-      final home = await state.active.toDb(database, []);
-      await database.save(home);
-      final newHome = state.active.copyWith(key: home.key);
+    final currentHome = accessor.getHome();
+    if (currentHome == null) {
+      final key = await accessor.saveHome(state.active);
+      final newHome = state.active.copyWith(key: key);
       emit(HomeState(active: newHome));
     } else {
-      final active = AppHome.fromDb(allHomes.first);
-      emit(HomeState(active: active));
+      emit(HomeState(active: currentHome));
     }
   }
 
@@ -50,14 +46,7 @@ class HomeService extends Cubit<HomeState> {
         room,
       ]);
     }
-    List<Room> rooms = [];
-    for (final room in home.rooms) {
-      final databaseRoom = await room.toDb(database);
-      await database.save(databaseRoom);
-      rooms.add(databaseRoom);
-    }
-    final databaseHome = await home.toDb(database, rooms);
-    await database.save(databaseHome);
+    await accessor.saveHome(home);
     emit(HomeState(active: home));
   }
 }
