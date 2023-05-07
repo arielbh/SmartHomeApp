@@ -9,9 +9,9 @@ class ShadeDefinition extends DeviceDefinition {
   String get name => "Shade";
   @override
   List<DeviceModelInfo> get models => [
-        DeviceModelInfo("1", "Lutron Serena Shades"),
-        DeviceModelInfo("2", "SmarterHome MySmartRollerShades"),
-        DeviceModelInfo("3", "Graber Motorized Shades"),
-        DeviceModelInfo("4", "IKEA Fyrtur"),
+        DeviceModelInfo(id: "1shade", name: "Lutron Serena Shades"),
+        DeviceModelInfo(id: "2shade", name: "SmarterHome MySmartRollerShades"),
+        DeviceModelInfo(id: "3shade", name: "Graber Motorized Shades"),
+        DeviceModelInfo(id: "4shade", name: "IKEA Fyrtur"),
       ];
 }

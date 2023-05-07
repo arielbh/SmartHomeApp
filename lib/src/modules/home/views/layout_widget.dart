@@ -8,58 +8,63 @@ class LayoutWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          color: Colors.lightBlue.withOpacity(0.25),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              RegionBuilder(
-                regionManager: locator<RegionManager>(),
-                regionName: RegionNames.topBarLeft.name,
-                multiChild: (children) => Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    ...children,
-                  ],
-                ),
-              ),
-              RegionBuilder(
-                regionManager: locator<RegionManager>(),
-                regionName: RegionNames.topBarRight.name,
-                multiChild: (children) => Row(
-                  children: [
-                    ...children,
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
-        Expanded(
-            child: Row(
-          children: [
-            RegionBuilder(
-              regionManager: locator<RegionManager>(),
-              regionName: RegionNames.mainLeft.name,
-              singleChild: (child) => child,
-            ),
-            Expanded(
-              child: RegionBuilder(
-                regionManager: locator<RegionManager>(),
-                regionName: RegionNames.mainCenter.name,
-                singleChild: (child) => child,
-              ),
-            ),
-            RegionBuilder(
-              regionManager: locator<RegionManager>(),
-              regionName: RegionNames.mainRight.name,
-              singleChild: (child) => child,
-            ),
-          ],
-        ))
-      ],
+    return RegionBuilder(
+      regionManager: locator<RegionManager>(),
+      regionName: RegionNames.main.name,
+      singleChild: (child) => child,
     );
+    // return Column(
+    //   children: [
+    //     Container(
+    //       color: Colors.lightBlue.withOpacity(0.25),
+    //       child: Row(
+    //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    //         children: [
+    //           RegionBuilder(
+    //             regionManager: locator<RegionManager>(),
+    //             regionName: RegionNames.topBarLeft.name,
+    //             multiChild: (children) => Row(
+    //               mainAxisAlignment: MainAxisAlignment.start,
+    //               children: [
+    //                 ...children,
+    //               ],
+    //             ),
+    //           ),
+    //           RegionBuilder(
+    //             regionManager: locator<RegionManager>(),
+    //             regionName: RegionNames.topBarRight.name,
+    //             multiChild: (children) => Row(
+    //               children: [
+    //                 ...children,
+    //               ],
+    //             ),
+    //           ),
+    //         ],
+    //       ),
+    //     ),
+    //     Expanded(
+    //         child: Row(
+    //       children: [
+    //         RegionBuilder(
+    //           regionManager: locator<RegionManager>(),
+    //           regionName: RegionNames.mainLeft.name,
+    //           singleChild: (child) => child,
+    //         ),
+    //         Expanded(
+    //           child: RegionBuilder(
+    //             regionManager: locator<RegionManager>(),
+    //             regionName: RegionNames.mainCenter.name,
+    //             singleChild: (child) => child,
+    //           ),
+    //         ),
+    //         RegionBuilder(
+    //           regionManager: locator<RegionManager>(),
+    //           regionName: RegionNames.mainRight.name,
+    //           singleChild: (child) => child,
+    //         ),
+    //       ],
+    //     ))
+    //   ],
+    // );
   }
 }

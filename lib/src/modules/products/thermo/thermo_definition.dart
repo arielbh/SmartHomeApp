@@ -10,9 +10,13 @@ class ThermoDefinition extends DeviceDefinition {
 
   @override
   List<DeviceModelInfo> get models => [
-        DeviceModelInfo("1", "Google Nest Learning Thermostat"),
-        DeviceModelInfo("2", "Amazon Smart Thermostat"),
-        DeviceModelInfo("3", "Mysa Smart Thermostat"),
-        DeviceModelInfo("4", "Ecobee Smart Thermostat Premium"),
+        DeviceModelInfo(
+            id: "1thermo",
+            name: "Google Nest Learning Thermostat",
+            description:
+                '''The Google Nest Learning Thermostat is a smart thermostat that uses machine learning algorithms to help users save energy and reduce their heating and cooling costs.'''),
+        DeviceModelInfo(id: "2thermo", name: "Amazon Smart Thermostat"),
+        DeviceModelInfo(id: "3thermo", name: "Mysa Smart Thermostat"),
+        DeviceModelInfo(id: "4thermo", name: "Ecobee Smart Thermostat Premium"),
       ];
 }

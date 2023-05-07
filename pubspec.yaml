@@ -19,6 +19,8 @@ dependencies:
   prism_flutter_go_router: ^0.0.1
   shared_preferences: ^2.0.15
   collection: ^1.16.0
+  freezed: ^2.3.3
+  freezed_annotation: ^2.2.0
 
 dev_dependencies:
   flutter_test:
@@ -29,3 +31,6 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+
+  assets:
+    - assets/images/

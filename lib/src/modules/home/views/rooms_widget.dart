@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:smart_home_app/src/common/app_models/app_home.dart';
+import 'package:smart_home_app/src/common/app_models/app_room.dart';
 import 'package:smart_home_app/src/common/dependencies/app_locator.dart';
+import 'package:smart_home_app/src/modules/device/services/device_manager.dart';
 import 'package:smart_home_app/src/modules/home/services/home_service.dart';
 
 class RoomsWidget extends StatelessWidget {
@@ -11,26 +15,70 @@ class RoomsWidget extends StatelessWidget {
     return BlocBuilder<HomeService, HomeState>(
       bloc: locator<HomeService>(),
       builder: (context, state) {
-        if (state.active == null) {
-          return const Text("No active Home");
-        }
-        return Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            children: [
-              ElevatedButton(
-                onPressed: () {},
-                child: Row(
-                  children: const [
-                    Icon(Icons.add),
-                    Text("Add Room"),
-                  ],
-                ),
-              ),
-            ],
+        if (state.active.rooms.isEmpty) return _EmptyHome(home: state.active);
+        return ListView.builder(
+          itemBuilder: (context, index) => _RoomItem(
+            room: state.active.rooms[index],
+            onPressed: (String id) {
+              // locator<GoRouter>().goNamed(
+              //   "device_info",
+              //   params: {'id': model.id},
+              // );
+            },
           ),
+          itemCount: state.active.rooms.length,
         );
       },
+    );
+  }
+}
+
+class _EmptyHome extends StatelessWidget {
+  final AppHome home;
+  const _EmptyHome({
+    super.key,
+    required this.home,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          "Welcome to ${home.name}",
+          style: Theme.of(context).textTheme.headlineMedium,
+        ),
+        Text("Add a device to get started"),
+        ElevatedButton(
+          onPressed: () => locator<GoRouter>().push("/device/add"),
+          child: const Text("Add Device"),
+        ),
+      ],
+    );
+  }
+}
+
+class _RoomItem extends StatelessWidget {
+  final AppRoom room;
+  final Function(String) onPressed;
+  const _RoomItem({
+    super.key,
+    required this.room,
+    required this.onPressed,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ExpansionTile(
+      leading: Icon(room.type.icon),
+      title: Text(room.type.name, style: Theme.of(context).textTheme.titleLarge),
+      children: room.deviceIds
+          .map((e) => ListTile(
+                title: Text(locator<DeviceManager>().getById(e).name),
+                onTap: () => onPressed(e),
+              ))
+          .toList(),
     );
   }
 }

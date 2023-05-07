@@ -1,30 +1,15 @@
 import 'package:hive/hive.dart';
+import 'package:smart_home_app/src/common/db_models/room.dart';
 
 part 'home.g.dart';
 
 @HiveType(typeId: 1)
-
 class Home extends HiveObject {
   Home({required this.name});
 
   @HiveField(0)
   String name;
 
-  //List<Rome>? rooms;
+  // @HiveField(1)
+  // HiveList? rooms;
 }
-// enum RoomType {
-//   draft,
-//   pending,
-//   sent,
-// }
-// @embedded
-// class Rome {
-
-//   //List<Device>? devices;
-
-// }
-
-// @embedded
-// class Device {
-
-// }

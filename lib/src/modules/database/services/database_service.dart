@@ -2,7 +2,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 
 class DatabaseService {
   Future<void> registerSchema<T>(TypeAdapter<T> adapter) async {
-    Hive.registerAdapter(adapter);
+    Hive.registerAdapter<T>(adapter);
     await Hive.openBox<T>("${T}Box");
   }
 

@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:prism_flutter_go_router/interfaces/module_route.dart';
-import 'package:smart_home_app/src/modules/device/views/add_device_screen.dart';
+import 'package:smart_home_app/src/modules/device/views/device_info_screen.dart';
 
-class AddDeviceRoute extends ModuleRoute {
-  AddDeviceRoute();
+class DeviceInfoRoute extends ModuleRoute {
+  DeviceInfoRoute();
 
   Widget build(BuildContext context, GoRouterState state) {
-    return const AddDeviceScreen();
+    return DeviceInfoScreen(
+      modelId: state.params["id"]!,
+    );
   }
 
-  String get screenPath => "/device/add";
+  String get screenPath => "/device/info/:id";
 
   @override
   bool get isRoot => true;
@@ -19,6 +21,7 @@ class AddDeviceRoute extends ModuleRoute {
   GoRoute toGoRoute([GlobalKey<NavigatorState>? parentNavigatorKey]) {
     return GoRoute(
       path: screenPath,
+      name: "device_info",
       pageBuilder: _defaultPageBuilder,
       parentNavigatorKey: parentNavigatorKey,
     );

@@ -21,9 +21,13 @@ class AddDeviceScreen extends StatelessWidget {
       body: ListView.builder(
         itemBuilder: (context, index) => _DeviceItem(
           definition: devices[index],
-          onPressed: (definition, model) {},
+          onPressed: (definition, model) {
+            locator<GoRouter>().pushNamed(
+              "device_info",
+              params: {'id': model.id},
+            );
+          },
         ),
-        // separatorBuilder: (context, index) => const Divider(),
         itemCount: devices.length,
       ),
     );
