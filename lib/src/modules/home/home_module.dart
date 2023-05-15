@@ -6,7 +6,6 @@ import 'package:smart_home_app/src/common/db_models/home.dart';
 import 'package:smart_home_app/src/common/db_models/room.dart';
 import 'package:smart_home_app/src/common/events/device_added_event.dart';
 import 'package:smart_home_app/src/common/region_names.dart';
-import 'package:smart_home_app/src/modules/app_services/services/shared_preferences_service.dart';
 import 'package:smart_home_app/src/modules/app_services/services/toaster.dart';
 import 'package:smart_home_app/src/modules/database/services/database_service.dart';
 import 'package:smart_home_app/src/modules/home/routes/layout_route.dart';
@@ -32,7 +31,6 @@ class HomeModule extends GoRouterModule {
     final accessor = HomeAccessor(database: database);
     container.registerLazySingleton(() => HomeService(
           accessor: accessor,
-          localStorageService: container<LocalStorageService>(),
         ));
     final regionManager = container<RegionManager>();
     regionManager.registerView(

@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_home_app/src/common/app_models/app_home.dart';
 import 'package:smart_home_app/src/common/app_models/app_room.dart';
 import 'package:smart_home_app/src/common/interfaces/room_type.dart';
-import 'package:smart_home_app/src/modules/app_services/services/shared_preferences_service.dart';
 import 'package:smart_home_app/src/modules/home/services/home_accessor.dart';
 
 class HomeState {
@@ -14,10 +13,8 @@ class HomeState {
 
 class HomeService extends Cubit<HomeState> {
   final HomeAccessor accessor;
-  final LocalStorageService localStorageService;
   HomeService({
     required this.accessor,
-    required this.localStorageService,
   }) : super(HomeState(active: const AppHome(name: 'My Home', rooms: []))) {
     loadHomes();
   }
