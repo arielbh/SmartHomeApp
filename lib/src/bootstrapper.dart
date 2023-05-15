@@ -5,6 +5,8 @@ import 'package:prism_flutter_go_router/interfaces/module_route.dart';
 import 'package:prism_flutter_go_router/prism_flutter_go_router.dart';
 import 'package:smart_home_app/src/modules/app_services/app_services_module.dart';
 import 'package:smart_home_app/src/modules/database/database_module.dart';
+import 'package:smart_home_app/src/modules/user/routes/welcome_route.dart';
+import 'package:smart_home_app/src/modules/user/user_module.dart';
 import 'package:smart_home_app/src/shell/shell_widget.dart';
 
 GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'root');
@@ -14,6 +16,7 @@ class Bootstrapper extends GoRouterBootstrapper {
   final _coreModules = [
     ModuleInfo((c) => AppServicesModule()),
     ModuleInfo((c) => DatabaseModule()),
+    ModuleInfo((c) => UserModule()),
   ];
 
   final _featureModules = [];
@@ -33,6 +36,7 @@ class Bootstrapper extends GoRouterBootstrapper {
 
     final goRouter = GoRouter(
       navigatorKey: _rootNavigatorKey,
+      initialLocation: WelcomeRoute().screenPath,
       routes: [
         _routeToTabs(innerRoutes),
         ...rootRoutes,
