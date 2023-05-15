@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:smart_home_app/src/common/interfaces/device_definition.dart';
 
 class DeviceManager {
-  List<DeviceDefinition> definitions = [SimpleDeviceDefinition()];
+  List<DeviceDefinition> definitions = [];
   void addDeviceDefinition(DeviceDefinition deviceDefinition) => definitions.add(deviceDefinition);
 
   DeviceModelInfo getById(String modelId) {
