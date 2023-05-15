@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:prism_flutter_core/prism_flutter_core.dart';
 import 'package:smart_home_app/src/common/dependencies/app_locator.dart';
-import 'package:smart_home_app/src/common/events/device_added_event.dart';
 import 'package:smart_home_app/src/common/interfaces/room_type.dart';
 import 'package:smart_home_app/src/modules/device/services/device_manager.dart';
 import 'package:smart_home_app/src/modules/home/services/home_service.dart';
@@ -121,7 +120,6 @@ class _InstallSheetState extends State<_InstallSheet> {
           ElevatedButton(
               onPressed: _roomType != null
                   ? () {
-                      locator<EventAggregator>().getEvent<DeviceAddedEvent>()?.publish(widget.deviceId);
                       locator<HomeService>().addDevice(widget.deviceId, _roomType!);
                       Navigator.pop(context);
                       locator<GoRouter>().go("/layout");
