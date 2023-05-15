@@ -7,6 +7,8 @@ import 'package:smart_home_app/src/modules/app_services/app_services_module.dart
 import 'package:smart_home_app/src/modules/database/database_module.dart';
 import 'package:smart_home_app/src/modules/device/device_module.dart';
 import 'package:smart_home_app/src/modules/home/home_module.dart';
+import 'package:smart_home_app/src/modules/products/shade/shade_module.dart';
+import 'package:smart_home_app/src/modules/products/thermo/thermo_module.dart';
 import 'package:smart_home_app/src/modules/user/routes/welcome_route.dart';
 import 'package:smart_home_app/src/modules/user/user_module.dart';
 import 'package:smart_home_app/src/shell/shell_widget.dart';
@@ -23,7 +25,11 @@ class Bootstrapper extends GoRouterBootstrapper {
     ModuleInfo((c) => DeviceModule()),
   ];
 
-  final _featureModules = [];
+  final _featureModules = [
+    ModuleInfo((c) => ThermoModule()),
+    ModuleInfo((c) => ShadeModule()),
+  ];
+
 
   @override
   ModuleCatalog createModuleCatalog() {

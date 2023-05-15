@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:smart_home_app/src/common/app_models/app_home.dart';
 import 'package:smart_home_app/src/common/app_models/app_room.dart';
 import 'package:smart_home_app/src/common/dependencies/app_locator.dart';
+import 'package:smart_home_app/src/modules/device/services/device_manager.dart';
 import 'package:smart_home_app/src/modules/home/services/home_service.dart';
 
 class RoomsWidget extends StatelessWidget {
@@ -19,12 +20,11 @@ class RoomsWidget extends StatelessWidget {
           itemBuilder: (context, index) => _RoomItem(
             room: state.active.rooms[index],
             onPressed: (String id) {
-              print("Open device $id");
-              // final definition = locator<DeviceManager>().getDefinition(id);
-              // locator<GoRouter>().pushNamed(
-              //   definition.operatePath,
-              //   params: {'deviceId': id},
-              // );
+              final definition = locator<DeviceManager>().getDefinition(id);
+              locator<GoRouter>().pushNamed(
+                definition.operatePath,
+                params: {'deviceId': id},
+              );
             },
           ),
           itemCount: state.active.rooms.length,
@@ -75,12 +75,16 @@ class _RoomItem extends StatelessWidget {
       leading: Icon(room.type.icon),
       title: Text(room.type.name, style: Theme.of(context).textTheme.titleLarge),
       children: room.deviceIds.map((e) {
+        final manager = locator<DeviceManager>();
+        final definition = manager.getDefinition(e);
+        final name = manager.getById(e).name;
+
         return ListTile(
           title: Row(
-            children: const [
-              Icon(Icons.home),
-              SizedBox(width: 8),
-              Text("A Device"),
+            children: [
+              Icon(definition.icon),
+              const SizedBox(width: 8),
+              Text(name),
             ],
           ),
           onTap: () => onPressed(e),
