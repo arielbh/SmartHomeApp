@@ -13,7 +13,7 @@ class HomeState {
 
 class HomeService extends Cubit<HomeState> {
   final HomeAccessor accessor;
-  HomeService({
+  HomeService({ 
     required this.accessor,
   }) : super(HomeState(active: const AppHome(name: 'My Home', rooms: []))) {
     loadHomes();
