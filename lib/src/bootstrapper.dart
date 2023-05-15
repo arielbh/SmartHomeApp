@@ -21,15 +21,14 @@ class Bootstrapper extends GoRouterBootstrapper {
     ModuleInfo((c) => AppServicesModule()),
     ModuleInfo((c) => DatabaseModule()),
     ModuleInfo((c) => UserModule()),
-    ModuleInfo((c) => HomeModule()),
     ModuleInfo((c) => DeviceModule()),
+    ModuleInfo((c) => HomeModule()),
   ];
 
   final _featureModules = [
     ModuleInfo((c) => ThermoModule()),
     ModuleInfo((c) => ShadeModule()),
   ];
-
 
   @override
   ModuleCatalog createModuleCatalog() {
